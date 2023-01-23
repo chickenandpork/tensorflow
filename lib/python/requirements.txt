@@ -1,0 +1,13 @@
+# README :)
+#
+# If you edit this, re-version-lock by running:
+#
+#    bazel build  lib/python:recompile_deps
+
+#argparse-prompt
+#kubernetes
+numpy
+pip-tools
+pytest >7.2
+#requests
+#setuptools

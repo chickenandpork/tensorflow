@@ -1,0 +1,73 @@
+# The Amazonlinux2-based bazel build container has a valid `python` (2 and 3) interpreters at
+# /usr/bin; unfortunately, the rules_python-0.2.0 detection fails to acknowledge them, or somehow
+# finds them lacking.  The following runtime config simply copies what typically happens -- a
+# non-hermetic influence of the build environment -- but in losing no hermeticity, it avoids the
+# failure to detect the python toolchain that is right there where it should be.
+#
+# python toolchain in (intel) Mac and AL2 linux are both at /usr/bin/python{2,3} so let's be
+# explicit there.
+
+load("@bazel_skylib//rules:diff_test.bzl", "diff_test")
+load("@bazel_skylib//rules:write_file.bzl", "write_file")
+load("@rules_python//python:defs.bzl", "py_runtime_pair")
+
+py_runtime(
+    name = "platform_py2_runtime",
+    interpreter_path = "/usr/bin/python2",
+    python_version = "PY2",
+)
+
+py_runtime(
+    name = "platform_py3_runtime",
+    interpreter_path = "/usr/bin/python3",
+    python_version = "PY3",
+)
+
+py_runtime_pair(
+    name = "platform_py_runtime_pair",
+    py2_runtime = ":platform_py2_runtime",
+    py3_runtime = ":platform_py3_runtime",
+)
+
+toolchain(
+    name = "python_toolchain",
+    #target_compatible_with = <...>,
+    toolchain = ":platform_py_runtime_pair",
+    toolchain_type = "@rules_python//python:toolchain_type",
+)
+
+# codify the process of fetching dependencies of required libs and version-locking.
+#
+# NOTE1: pip-compile should be a py_binary
+#
+# NOTE2: we're breaking the rule of rules not changing source files intentionally; we're not
+# running this every time though.
+#
+# NOTE3: the "output" of this is the log of the work, so don't go re-using it except to force the
+# job to be run
+genrule(
+    name = "recompile_deps",
+    srcs = ["requirements.txt"],
+    outs = ["requirements_lock.txt"],
+    cmd = """set +x; CUSTOM_COMPILE_COMMAND="bazel build //lib/python:recompile_deps" pip-compile --allow-unsafe --resolver=backtracking --output-file $@ $(SRCS)""",
+    tags = ["manual"],
+    visibility = ["//:__subpackages__"],  # effectively public within this repo
+)
+
+write_file(
+    name = "gen_update",
+    out = "update.sh",
+    content = [
+        # This depends on bash, would need tweaks for Windows
+        "#!/usr/bin/env bash",
+        # Bazel gives us a way to access the source folder!
+        "cd $BUILD_WORKSPACE_DIRECTORY",
+        "cp -fv bazel-bin/lib/python/requirements_lock.txt lib/python/requirements_lock.txt",
+    ],
+)
+
+sh_binary(
+    name = "vendor_requirements",
+    srcs = [":gen_update"],
+    data = [":recompile_deps"],
+)
