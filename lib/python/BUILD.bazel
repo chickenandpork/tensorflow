@@ -1,10 +1,4 @@
-# The Amazonlinux2-based bazel build container has a valid `python` (2 and 3) interpreters at
-# /usr/bin; unfortunately, the rules_python-0.2.0 detection fails to acknowledge them, or somehow
-# finds them lacking.  The following runtime config simply copies what typically happens -- a
-# non-hermetic influence of the build environment -- but in losing no hermeticity, it avoids the
-# failure to detect the python toolchain that is right there where it should be.
-#
-# python toolchain in (intel) Mac and AL2 linux are both at /usr/bin/python{2,3} so let's be
+# python toolchain in (intel) Mac and M1 linux are both at /usr/bin/python{2,3} so let's be
 # explicit there.
 
 load("@bazel_skylib//rules:diff_test.bzl", "diff_test")
@@ -37,14 +31,6 @@ toolchain(
 )
 
 # codify the process of fetching dependencies of required libs and version-locking.
-#
-# NOTE1: pip-compile should be a py_binary
-#
-# NOTE2: we're breaking the rule of rules not changing source files intentionally; we're not
-# running this every time though.
-#
-# NOTE3: the "output" of this is the log of the work, so don't go re-using it except to force the
-# job to be run
 genrule(
     name = "recompile_deps",
     srcs = ["requirements.txt"],
@@ -54,6 +40,7 @@ genrule(
     visibility = ["//:__subpackages__"],  # effectively public within this repo
 )
 
+# Break the rules: write a file back to source path (Fighting with bazel)
 write_file(
     name = "gen_update",
     out = "update.sh",
@@ -67,7 +54,8 @@ write_file(
 )
 
 sh_binary(
-    name = "vendor_requirements",
+    name = "update_deps",
     srcs = [":gen_update"],
     data = [":recompile_deps"],
+    tags = ["manual"],
 )

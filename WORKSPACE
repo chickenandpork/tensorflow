@@ -16,6 +16,9 @@ http_archive(
     url = "https://github.com/bazelbuild/rules_python/archive/refs/tags/0.16.2.tar.gz",
 )
 
+#
+# Python version-locked requirements
+#
 register_toolchains("//lib/python:python_toolchain")
 
 load("@rules_python//python:pip.bzl", "pip_parse")
@@ -24,6 +27,9 @@ pip_parse(
     name = "pip",
     requirements_lock = "//lib/python:requirements_lock.txt",
 )
+load("@pip//:requirements.bzl", "install_deps")
+
+install_deps()
 
 #load("@rules_python//python:repositories.bzl", "py_repositories")
 #

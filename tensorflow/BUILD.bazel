@@ -1,0 +1,13 @@
+load("@rules_python//python:defs.bzl", "py_binary", "py_library", "py_test")
+load("@pip//:requirements.bzl", "requirement")
+
+py_binary(
+    name = "single_celsius_fahrenheit",
+    srcs = ["single_celsius_fahrenheit.py"],
+    #data = [":transform"],  # a cc_binary which we invoke at run time
+    deps = [
+        requirement("matplotlib"),
+        requirement("numpy"),
+        requirement("tensorflow"),
+    ],
+)

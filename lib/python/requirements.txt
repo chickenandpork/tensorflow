@@ -6,8 +6,10 @@
 
 #argparse-prompt
 #kubernetes
+matplotlib
 numpy
 pip-tools
 pytest >7.2
 #requests
 #setuptools
+tensorflow
