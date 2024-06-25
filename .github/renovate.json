@@ -14,8 +14,9 @@
       ]
     },
     {
+      "automerge": true,
       "matchUpdateTypes": ["minor", "patch"],
-      "automerge": true
+      "minimumReleaseAge": "3 days"
     }
   ]
 }
