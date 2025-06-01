@@ -1,0 +1,53 @@
+module(
+    name = "tensorfloe-experimentation",
+    version = "0.0.0",
+    compatibility_level = 1,
+)
+
+bazel_dep(name = "bazel_skylib", version = "1.7.1")
+bazel_dep(name = "platforms", version = "0.0.11")
+bazel_dep(name = "rules_pkg", version = "1.0.1")
+bazel_dep(name = "rules_python", version = "1.4.1")
+
+
+#
+# Python version-locked requirements
+#
+VER_PY = "3.10"
+
+python = use_extension("@rules_python//python/extensions:python.bzl", "python")
+python.defaults(
+    # Use python.defaults if you have defined multiple toolchain versions.
+    python_version = VER_PY,
+    python_version_env = "BAZEL_PYTHON_VERSION",
+)
+python.toolchain(
+    configure_coverage_tool = True,
+    python_version = VER_PY,
+)
+
+pip = use_extension("@rules_python//python/extensions:pip.bzl", "pip")
+
+pip.parse(
+    experimental_target_platforms = [
+        # Using host python version
+        "linux_*",
+        "osx_*",
+    ],
+    hub_name = "pip",
+    python_version = VER_PY,
+    requirements_by_platform = {
+        # Default requirements file for needs to explicitly provide the platforms
+        "//lib/python:requirements_lock.txt": "linux_*",
+        ## "//lib/python:requirements_macos_amd64.txt": "osx_x86_64",
+        ## "//lib/python:requirements_macos_arm64.txt": "osx_aarch64",
+        # This API allows one to specify additional platforms that the users
+        # configure the toolchains for themselves. In this example we add
+        # `windows_aarch64` to illustrate that `rules_python` won't fail to
+        # process the value, but it does not mean that this example will work
+        # on Windows ARM.
+    },
+)
+
+use_repo (pip, "pip")
+

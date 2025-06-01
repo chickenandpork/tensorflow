@@ -12,3 +12,4 @@ bazel-tensorflow
 bazel-bin
 bazel-out
 bazel-testlogs
+MODULE.bazel.lock
