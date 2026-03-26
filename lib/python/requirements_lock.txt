@@ -97,7 +97,7 @@ protobuf==3.19.6
     # via
     #   tensorboard
     #   tensorflow
-pyasn1==0.4.8
+pyasn1==0.6.3
     # via
     #   pyasn1-modules
     #   rsa
