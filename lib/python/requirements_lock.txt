@@ -28,7 +28,7 @@ cycler==0.12.1
     # via matplotlib
 exceptiongroup==1.1.0
     # via pytest
-flatbuffers==23.1.21
+flatbuffers==23.5.26
     # via tensorflow
 fonttools==4.60.2
     # via matplotlib
