@@ -75,7 +75,7 @@ numpy==1.26.4
     #   opt-einsum
     #   tensorboard
     #   tensorflow
-oauthlib==3.2.2
+oauthlib==3.3.1
     # via requests-oauthlib
 opt-einsum==3.3.0
     # via tensorflow
