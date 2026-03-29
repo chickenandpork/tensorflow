@@ -124,7 +124,7 @@ setuptools==66.1.1
     #   pip-tools
     #   tensorboard
     #   tensorflow
-six==1.16.0
+six==1.17.0
     # via
     #   astunparse
     #   google-auth
