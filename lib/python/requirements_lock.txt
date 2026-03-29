@@ -131,7 +131,7 @@ six==1.16.0
     #   google-pasta
     #   python-dateutil
     #   tensorflow
-tensorboard==2.11.2
+tensorboard==2.20.0
     # via tensorflow
 tensorboard-data-server==0.6.1
     # via tensorboard
