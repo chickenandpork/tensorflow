@@ -103,7 +103,7 @@ pyasn1==0.6.3
     #   rsa
 pyasn1-modules==0.4.2
     # via google-auth
-pyparsing==3.0.9
+pyparsing==3.3.2
     # via matplotlib
 pyproject-hooks==1.2.0
     # via build
