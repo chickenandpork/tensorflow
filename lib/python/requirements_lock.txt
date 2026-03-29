@@ -85,7 +85,7 @@ packaging==23.0
     #   matplotlib
     #   pytest
     #   tensorflow
-pillow==9.4.0
+pillow==9.5.0
     # via matplotlib
 pip==22.3.1
     # via pip-tools
