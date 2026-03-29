@@ -109,7 +109,7 @@ pyproject-hooks==1.2.0
     # via build
 pytest==7.4.4
     # via -r lib/python/requirements.txt
-python-dateutil==2.8.2
+python-dateutil==2.9.0.post0
     # via matplotlib
 requests==2.33.0
     # via
