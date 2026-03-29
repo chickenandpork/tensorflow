@@ -105,7 +105,7 @@ pyasn1-modules==0.4.2
     # via google-auth
 pyparsing==3.0.9
     # via matplotlib
-pyproject-hooks==1.0.0
+pyproject-hooks==1.2.0
     # via build
 pytest==7.2.1
     # via -r lib/python/requirements.txt
