@@ -143,7 +143,7 @@ tensorflow-estimator==2.15.0
     # via tensorflow
 tensorflow-io-gcs-filesystem==0.37.1
     # via tensorflow
-termcolor==2.2.0
+termcolor==2.5.0
     # via tensorflow
 tomli==2.0.1
     # via
