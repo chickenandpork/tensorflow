@@ -133,7 +133,7 @@ six==1.17.0
     #   tensorflow
 tensorboard==2.20.0
     # via tensorflow
-tensorboard-data-server==0.6.1
+tensorboard-data-server==0.7.2
     # via tensorboard
 tensorboard-plugin-wit==1.8.1
     # via tensorboard
