@@ -145,7 +145,7 @@ tensorflow-io-gcs-filesystem==0.37.1
     # via tensorflow
 termcolor==2.2.0
     # via tensorflow
-tomli==2.0.1
+tomli==2.4.1
     # via
     #   build
     #   pyproject-hooks
