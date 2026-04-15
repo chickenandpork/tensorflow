@@ -54,7 +54,7 @@ importlib-metadata==6.11.0
     # via markdown
 iniconfig==2.3.0
     # via pytest
-keras==2.15.0
+keras==3.13.2
     # via tensorflow
 kiwisolver==1.5.0
     # via matplotlib
