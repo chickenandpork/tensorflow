@@ -60,7 +60,7 @@ kiwisolver==1.5.1
     # via matplotlib
 libclang==15.0.6.1
     # via tensorflow
-markdown==3.10.2
+markdown==3.10.3
     # via tensorboard
 markupsafe==2.1.5
     # via werkzeug
