@@ -34,7 +34,7 @@ fonttools==4.64.0
     # via matplotlib
 gast==0.7.0
     # via tensorflow
-google-auth==2.49.1
+google-auth==2.57.0
     # via
     #   google-auth-oauthlib
     #   tensorboard
