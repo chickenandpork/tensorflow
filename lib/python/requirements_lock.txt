@@ -163,5 +163,5 @@ wheel==0.48.0
     #   tensorboard
 wrapt==1.17.3
     # via tensorflow
-zipp==3.19.1
+zipp==3.23.1
     # via importlib-metadata
