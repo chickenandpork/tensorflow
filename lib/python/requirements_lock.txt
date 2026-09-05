@@ -4,7 +4,7 @@
 #
 #    bazel build //lib/python:recompile_deps
 #
-absl-py==1.4.0
+absl-py==2.5.0
     # via
     #   tensorboard
     #   tensorflow
