@@ -12,7 +12,7 @@ astunparse==1.6.3
     # via tensorflow
 attrs==22.2.0
     # via pytest
-build==0.10.0
+build==1.6.0
     # via pip-tools
 cachetools==5.5.2
     # via google-auth
